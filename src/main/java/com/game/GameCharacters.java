@@ -40,12 +40,6 @@ public enum GameCharacters {
 
     @Override
     public String toString() {
-        return "GameCharacters{" +
-                "playerClass='" + playerClass + '\'' +
-                ", description='" + description + '\'' +
-                ", health=" + health +
-                ", attackPower=" + attackPower +
-                ", defencePower=" + defencePower +
-                '}';
+        return "Class=>"+playerClass+"  Description=>"+description+"  HP=>"+health+"  POWER=>"+attackPower+"  ARMOUR=>"+defencePower;
     }
 }

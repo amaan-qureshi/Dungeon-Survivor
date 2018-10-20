@@ -1,4 +1,6 @@
-package com.game;
+package com.game.maps;
+
+import com.game.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,19 +12,18 @@ import static java.util.stream.Stream.generate;
 
 public class Map implements Serializable{
 
-    int rowMapSize = 8;
-    int colMapSize = 8;
-
     private final UserMovementInput userMovementInput;
     private final InteractionFactory interactionFactory;
     private boolean isMapPaused;
     private boolean isGameExited;
 
-    private List<List<MapBlock>> mapBlocks = new ArrayList<List<MapBlock>>();
+    private final List<List<MapBlock>> mapBlocks = new ArrayList<>();
     public Map(UserMovementInput userMovementInput, InteractionFactory interactionFactory){
         this.userMovementInput = userMovementInput;
         this.interactionFactory = interactionFactory;
 
+        int rowMapSize = 8;
+        int colMapSize = 8;
         for(int i =0; i<rowMapSize ; i++){
             List<MapBlock> mapBlocksList = new ArrayList<>();
             for(int j=0; j<colMapSize ; j++){
@@ -34,10 +35,8 @@ public class Map implements Serializable{
         }
     }
 
-    public void draw(){
-
+    public void render(){
         String lineSeparator = prepareLineSeparator(mapBlocks.size());
-
         System.out.println("MAP");
         System.out.println(lineSeparator);
         mapBlocks.forEach(this::drawLine);
@@ -77,16 +76,11 @@ public class Map implements Serializable{
     }
 
     public boolean isPlayerAlive() {
-        //return blocks().anyMatch(Entity::containUserCharacter);
         return blocks().anyMatch(b -> b.getEntity()!=null && b.getEntity().getType() == EntityType.PLAYER &&  b.getEntity().isAlive());
     }
 
     private Stream<MapBlock> blocks() {
         return mapBlocks.stream().flatMap(List::stream);
-    }
-
-    public boolean tasksLeft() {
-        return blocks().anyMatch(b -> b.getEntity()!=null && b.getEntity().getType() == EntityType.ENEMY &&  b.getEntity().isAlive());
     }
 
     public void goToNextIteration() {
@@ -124,15 +118,10 @@ public class Map implements Serializable{
     }
 
     private void moveUser(Position currentPosition, Position nextPosition) {
-       // Entity containerEntity = entityOn(currentPosition);
-        //Entity newContainerEntity = entityOn(nextPosition);
 
         MapBlock currentBlock = getBlockByPosition(currentPosition);
         MapBlock nextBlock = getBlockByPosition(nextPosition);
 
-      /*  if (!newContainerEntity.canContainAnotherEntity()) {
-            return;
-        }*/
         Entity user = currentBlock.getEntity();
 
         if(nextBlock.getEntity()==null){
@@ -150,24 +139,7 @@ public class Map implements Serializable{
                 System.out.print("Final User XP : " + user.getExperience());
             }
         }
-      /*
-        if (newContainerEntity.containTasks(taskDetectionCondition)) {
-            Entity userCharacter = containerEntity.findEntity(Entity::isUser);
-            Entity taskEntity = newContainerEntity.findEntity(taskDetectionCondition);
-
-            taskCompletionStrategy.complete(userCharacter, taskEntity);
-        }
-
-        containerEntity.getInnerEntity().ifPresent(userCharacter -> {
-            containerEntity.clear();
-            newContainerEntity.take(userCharacter);
-        });
-
-        if (!isUserAlive(newContainerEntity)) {
-            newContainerEntity.clear();
-        }*/
     }
-
 
     private MapBlock getBlockByPosition(Position position) {
         return mapBlocks.get(position.getX()).get(position.getY());

@@ -1,10 +1,10 @@
 package com.game;
 
-public class LevelFactory {
+public class LevelEngine {
 
-    private final Menu<DifficultyLevel> difficultyMenu = new Menu<>("Choose Game Difficulty:", DifficultyLevel.values());
+    private static final Menu<DifficultyLevel> difficultyMenu = new Menu<>("Choose Game Difficulty:", DifficultyLevel.values());
 
-    public int getEnemyCount(){
+    public static int getEnemyCount(){
         difficultyMenu.draw();
         DifficultyLevel difficultyLevel = difficultyMenu.chooseItem();
 

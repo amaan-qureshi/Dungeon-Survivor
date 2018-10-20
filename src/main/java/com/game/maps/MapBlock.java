@@ -1,10 +1,13 @@
-package com.game;
+package com.game.maps;
+
+import com.game.Entity;
+import com.game.EntityType;
+import com.game.Position;
 
 import java.io.Serializable;
 
 public class MapBlock implements Serializable{
 
-    private boolean containsLiveEntity;
     private Entity entity;
     private Position position;
 
@@ -15,14 +18,6 @@ public class MapBlock implements Serializable{
         }
 
         return EntityType.UNKNOWN;
-    }
-
-    public boolean isContainsLiveEntity() {
-        return containsLiveEntity;
-    }
-
-    public void setContainsLiveEntity(boolean containsLiveEntity) {
-        this.containsLiveEntity = containsLiveEntity;
     }
 
     public Entity getEntity() {
