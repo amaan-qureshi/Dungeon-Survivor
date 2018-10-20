@@ -1,23 +1,24 @@
-package com.game.entities;
+package com.game.components.entities.impl;
 
 import com.game.constants.EntityType;
+import com.game.components.entities.Entity;
 
 public class Enemy implements Entity {
 
-    private int health = 10;
-    private int attackPower = 20;
-    private int defencePower = 10;
-
+    private int health;
+    private final int attackPower;
+    private final int defencePower;
     private boolean isAlive = true;
 
-    @Override
-    public String name() {
-        return null;
+    public Enemy(int health, int attackPower, int defencePower) {
+        this.health = health;
+        this.attackPower = attackPower;
+        this.defencePower = defencePower;
     }
 
     @Override
-    public boolean isStatic() {
-        return false;
+    public String getName() {
+        return "Bandit";
     }
 
     @Override
@@ -37,7 +38,6 @@ public class Enemy implements Entity {
         }
     }
 
-
     @Override
     public int getHealth() {
         return health;
@@ -54,12 +54,12 @@ public class Enemy implements Entity {
     }
 
     @Override
-    public void addExperience(long points) {
-
-    }
+    public void addExperience(long points) {}
 
     @Override
-    public long getExperience() {
-        return 0;
-    }
+    public long getExperience() {return 0;}
+
+    @Override
+    public String getPlayerClass() { return "Generic Enemy"; }
+
 }

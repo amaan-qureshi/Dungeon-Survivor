@@ -1,5 +1,6 @@
-package com.game.input;
+package com.game.components.input.util;
 
+import com.game.components.RenderComponents;
 import com.game.util.IntRange;
 
 import java.io.Serializable;
@@ -7,7 +8,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public class ActionMenu<T extends Enum>  implements Serializable{
+public class ActionMenu<T extends Enum> implements RenderComponents {
 
     private static final int MENU_ITEM_OFFSET = 1;
 
@@ -20,10 +21,7 @@ public class ActionMenu<T extends Enum>  implements Serializable{
 
     private final T[] items;
 
-    private final Runnable redrawWithWarningMessage = (Runnable & Serializable)() -> {
-        //redraw();
-        printMenuFooter(true);
-    };
+    private final Runnable redrawWithWarningMessage = (Runnable & Serializable)() -> printMenuFooter(true);
 
     private final IntRange acceptableItems;
 
@@ -38,8 +36,8 @@ public class ActionMenu<T extends Enum>  implements Serializable{
         this.acceptableItems = IntRange.of(1, items.length);
     }
 
-    //@Override
-    public void draw() {
+    @Override
+    public void render() {
         System.out.println(title);
         Stream.of(items).map(ENUM_TO_STRING).forEach(System.out::println);
     }

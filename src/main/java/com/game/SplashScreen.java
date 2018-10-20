@@ -1,11 +1,10 @@
-package com.game.core;
+package com.game;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-public class SpashScreen {
-    public static void showSpash(){
+class SplashScreen {
+    static void showSplash(){
         int width = 300;
         int height = 30;
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -17,15 +16,11 @@ public class SpashScreen {
         for (int y = 0; y < height; y++) {
             StringBuilder sb = new StringBuilder();
             for (int x = 0; x < width; x++) {
-
                 sb.append(image.getRGB(x, y) == -16777216 ? " " : "@");
-
             }
-
             if (sb.toString().trim().isEmpty()) {
                 continue;
             }
-
             System.out.println(sb);
         }
     }

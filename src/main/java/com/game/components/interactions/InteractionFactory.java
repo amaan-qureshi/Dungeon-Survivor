@@ -1,7 +1,6 @@
-package com.game.interactions;
+package com.game.components.interactions;
 
 import com.game.constants.EntityType;
-import com.game.input.UserFightConsoleInput;
 
 import java.io.Serializable;
 
@@ -11,7 +10,7 @@ public class InteractionFactory implements Serializable{
 
         switch (entityType) {
             case ENEMY :
-                return new PlayerEnemyFight(new UserFightConsoleInput());
+                return new PlayerEnemyFight();
              default:
                  throw new IllegalArgumentException("Interaction Factory Not configured properly");
 

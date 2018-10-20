@@ -1,6 +1,6 @@
-package com.game.maps;
+package com.game.components.maps;
 
-import com.game.entities.Entity;
+import com.game.components.entities.Entity;
 import com.game.constants.EntityType;
 import com.game.util.Position;
 
@@ -11,7 +11,7 @@ public class MapBlock implements Serializable{
     private Entity entity;
     private Position position;
 
-    public EntityType getBlockEntityType(){
+    EntityType getBlockEntityType(){
 
         if(this.entity!=null) {
             return this.entity.getType();
@@ -24,15 +24,15 @@ public class MapBlock implements Serializable{
         return entity;
     }
 
-    public void setEntity(Entity entity) {
+    void setEntity(Entity entity) {
         this.entity = entity;
     }
 
-    public Position getPosition() {
+    Position getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    void setPosition(Position position) {
         this.position = position;
     }
 }

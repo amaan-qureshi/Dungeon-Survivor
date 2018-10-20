@@ -1,6 +1,6 @@
 package com.game.constants;
 public enum GameCharacters {
-    SOLDIER("Soldier","Elite Balanced Fighter",30,30,40),
+    SOLDIER("Knight","Elite Balanced Fighter",30,30,40),
     NINJA("Ninja","Silent and Fast",50,25,25),
     TANK("Tank","Slow and Strong",30,20,50);
 
@@ -20,10 +20,6 @@ public enum GameCharacters {
 
     public String getPlayerClass() {
         return playerClass;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public int getHealth() {

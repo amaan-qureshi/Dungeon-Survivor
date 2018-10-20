@@ -1,14 +1,16 @@
-package com.game.input;
+package com.game.components.input.impl;
 
 import com.game.constants.DifficultyLevel;
 
-public class LevelEngine {
+public class EnemySelectorConsole extends GenericMenuConsole {
 
-    private static final ActionMenu<DifficultyLevel> difficultyMenu = new ActionMenu<>("Choose Game Difficulty:", DifficultyLevel.values());
+    @SuppressWarnings("unchecked")
+    public EnemySelectorConsole(String menuTitle, DifficultyLevel... levels) {
+        super(menuTitle, levels);
+    }
 
-    public static int getEnemyCount(){
-        difficultyMenu.draw();
-        DifficultyLevel difficultyLevel = difficultyMenu.chooseItem();
+    public int getEnemyCount() {
+        DifficultyLevel difficultyLevel = (DifficultyLevel) getActionValue();
 
         switch (difficultyLevel) {
             case EASY:

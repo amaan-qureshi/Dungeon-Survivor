@@ -1,10 +1,12 @@
-package com.game.core;
+package com.game;
 
-import com.game.entities.PlayerFactory;
-import com.game.input.LevelEngine;
-import com.game.input.MainMenuConsoleInput;
-import com.game.maps.Map;
-import com.game.maps.MapFactory;
+import com.game.constants.DifficultyLevel;
+import com.game.constants.MainMenuActions;
+import com.game.components.entities.impl.PlayerFactory;
+import com.game.components.input.impl.GenericMenuConsole;
+import com.game.components.input.impl.EnemySelectorConsole;
+import com.game.components.maps.Map;
+import com.game.components.maps.MapFactory;
 
 import java.io.*;
 
@@ -13,18 +15,20 @@ import static com.game.messages.MessageUtil.getMessage;
 public class Launcher {
 
     private static Map activeGameMap;
-    private static final MainMenuConsoleInput mainMenuConsoleInput = new MainMenuConsoleInput();
+
+    @SuppressWarnings("unchecked")
+    private static final GenericMenuConsole menuConsole = new GenericMenuConsole(getMessage("MAIN_MENU_OPTION"),MainMenuActions.values());
 
     public static void main(String... args) {
-        SpashScreen.showSpash();
+        SplashScreen.showSplash();
         do {
             goToMainMenu();
         }
-        while (activeGameMap==null || (activeGameMap !=null && !activeGameMap.isGameExited()));
+        while (activeGameMap==null || !activeGameMap.isGameExited());
     }
 
     private static void goToMainMenu() {
-        switch (mainMenuConsoleInput.getAction()) {
+        switch ((MainMenuActions)menuConsole.getActionValue()) {
             case START_NEW:
                 startGame(null);
                 break;
@@ -42,15 +46,18 @@ public class Launcher {
 
     private static void startGame(Map map) {
         if (map == null) {
-            activeGameMap = MapFactory.getMap(LevelEngine.getEnemyCount(), PlayerFactory.getPlayer());
+            activeGameMap = MapFactory.getMap(new EnemySelectorConsole(getMessage("DIFFICULTY_OPTION"), DifficultyLevel.values()).getEnemyCount(), PlayerFactory.getPlayer());
         }
         activeGameMap.render();
-        while (activeGameMap.isPlayerAlive()/* && map.tasksLeft()*/) {
-            activeGameMap.goToNextIteration();
+        while (activeGameMap.isPlayerAlive() && activeGameMap.tasksLeft()) {
+            activeGameMap.goToNextTurn();
             if (activeGameMap.isMapPaused()) {
                 break;
             }
             activeGameMap.render();
+            if(activeGameMap.isPlayerAlive() && !activeGameMap.tasksLeft()){
+                System.out.println(getMessage("WIN_MESSAGE",activeGameMap.findPlayerBlock().getEntity().getExperience()));
+            }
         }
     }
 

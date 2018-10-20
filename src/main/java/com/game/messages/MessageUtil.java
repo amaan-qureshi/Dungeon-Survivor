@@ -14,7 +14,7 @@ public class MessageUtil {
             ex.printStackTrace();
         }
     }
-    public static String getMessage(String key){
-        return messages.getProperty(key);
+    public static String getMessage(String key, Object... args){
+        return String.format(messages.getProperty(key),args);
     }
 }
