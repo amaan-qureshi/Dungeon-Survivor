@@ -1,4 +1,6 @@
-package com.game;
+package com.game.input;
+
+import com.game.input.ConsoleReader;
 
 public class TextBox{
 

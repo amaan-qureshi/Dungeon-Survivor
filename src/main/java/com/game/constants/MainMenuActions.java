@@ -1,4 +1,4 @@
-package com.game;
+package com.game.constants;
 
 public enum MainMenuActions {
     START_NEW("Start New Game"),

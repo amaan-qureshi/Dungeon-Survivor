@@ -1,6 +1,8 @@
 package com.game.core;
 
-import com.game.*;
+import com.game.entities.PlayerFactory;
+import com.game.input.LevelEngine;
+import com.game.input.MainMenuConsoleInput;
 import com.game.maps.Map;
 import com.game.maps.MapFactory;
 

@@ -1,4 +1,7 @@
-package com.game;
+package com.game.interactions;
+
+import com.game.constants.EntityType;
+import com.game.input.UserFightConsoleInput;
 
 import java.io.Serializable;
 

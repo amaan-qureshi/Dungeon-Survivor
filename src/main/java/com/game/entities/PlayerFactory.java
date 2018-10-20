@@ -1,9 +1,13 @@
-package com.game;
+package com.game.entities;
+
+import com.game.constants.GameCharacters;
+import com.game.input.TextBox;
+import com.game.input.ActionMenu;
 
 public class PlayerFactory {
 
     private static final TextBox characterName = new TextBox("Character name:");
-    private static final Menu<GameCharacters> raceMenu = new Menu<>("Choose Player Kind:", GameCharacters.values());
+    private static final ActionMenu<GameCharacters> raceMenu = new ActionMenu<>("Choose Player Kind:", GameCharacters.values());
 
     public static Player getPlayer() {
         characterName.showTitle();

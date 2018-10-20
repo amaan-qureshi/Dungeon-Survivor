@@ -1,4 +1,4 @@
-package com.game;
+package com.game.input;
 
 import java.io.Serializable;
 import java.util.Scanner;

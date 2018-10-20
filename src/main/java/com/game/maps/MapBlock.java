@@ -1,8 +1,8 @@
 package com.game.maps;
 
-import com.game.Entity;
-import com.game.EntityType;
-import com.game.Position;
+import com.game.entities.Entity;
+import com.game.constants.EntityType;
+import com.game.util.Position;
 
 import java.io.Serializable;
 

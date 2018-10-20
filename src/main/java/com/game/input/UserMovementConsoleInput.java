@@ -1,9 +1,11 @@
-package com.game;
+package com.game.input;
 
+
+import com.game.util.Position;
 
 public class UserMovementConsoleInput implements UserMovementInput {
 
-    private final Menu<Movement> menu = new Menu<>("Choose character movement:", Movement.values());
+    private final ActionMenu<Movement> menu = new ActionMenu<>("Choose character movement:", Movement.values());
 
     @Override
     public Position getNextPosition(Position currentPosition) {

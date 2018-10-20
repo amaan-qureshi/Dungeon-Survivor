@@ -1,4 +1,6 @@
-package com.game;
+package com.game.entities;
+
+import com.game.constants.EntityType;
 
 import java.io.Serializable;
 

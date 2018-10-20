@@ -1,4 +1,6 @@
-package com.game;
+package com.game.entities;
+
+import com.game.constants.EntityType;
 
 public class Player implements Entity {
 

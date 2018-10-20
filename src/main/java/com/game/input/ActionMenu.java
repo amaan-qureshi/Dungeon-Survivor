@@ -1,11 +1,13 @@
-package com.game;
+package com.game.input;
+
+import com.game.util.IntRange;
 
 import java.io.Serializable;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public class Menu<T extends Enum>  implements Serializable{
+public class ActionMenu<T extends Enum>  implements Serializable{
 
     private static final int MENU_ITEM_OFFSET = 1;
 
@@ -26,7 +28,7 @@ public class Menu<T extends Enum>  implements Serializable{
     private final IntRange acceptableItems;
 
     @SafeVarargs
-    public Menu(String title, T... items) {
+    public ActionMenu(String title, T... items) {
         if (items.length == 0) {
             throw new IllegalArgumentException("There are no configured menu items");
         }

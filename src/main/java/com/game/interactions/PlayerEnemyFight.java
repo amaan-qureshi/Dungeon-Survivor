@@ -1,6 +1,8 @@
-package com.game;
+package com.game.interactions;
 
-import java.util.Random;
+import com.game.util.RandomUtil;
+import com.game.entities.Entity;
+import com.game.input.UserFightConsoleInput;
 
 public class PlayerEnemyFight implements Interaction {
 

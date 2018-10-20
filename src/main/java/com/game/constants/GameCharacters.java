@@ -1,4 +1,4 @@
-package com.game;
+package com.game.constants;
 public enum GameCharacters {
     SOLDIER("Soldier","Elite Balanced Fighter",30,30,40),
     NINJA("Ninja","Silent and Fast",50,25,25),

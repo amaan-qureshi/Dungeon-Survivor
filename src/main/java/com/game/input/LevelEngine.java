@@ -1,8 +1,10 @@
-package com.game;
+package com.game.input;
+
+import com.game.constants.DifficultyLevel;
 
 public class LevelEngine {
 
-    private static final Menu<DifficultyLevel> difficultyMenu = new Menu<>("Choose Game Difficulty:", DifficultyLevel.values());
+    private static final ActionMenu<DifficultyLevel> difficultyMenu = new ActionMenu<>("Choose Game Difficulty:", DifficultyLevel.values());
 
     public static int getEnemyCount(){
         difficultyMenu.draw();

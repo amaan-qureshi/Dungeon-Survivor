@@ -1,6 +1,10 @@
 package com.game.maps;
 
-import com.game.*;
+import com.game.entities.Enemy;
+import com.game.entities.Player;
+import com.game.input.UserMovementConsoleInput;
+import com.game.interactions.InteractionFactory;
+import com.game.util.Position;
 
 import java.util.ArrayList;
 import java.util.List;
