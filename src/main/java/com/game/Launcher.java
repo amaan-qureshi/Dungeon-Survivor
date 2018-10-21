@@ -7,6 +7,7 @@ import com.game.components.input.impl.GenericMenuConsole;
 import com.game.components.input.impl.EnemySelectorConsole;
 import com.game.components.maps.Map;
 import com.game.components.maps.MapFactory;
+import com.game.constants.MessageConstants;
 
 import java.io.*;
 
@@ -17,7 +18,7 @@ public class Launcher {
     private static Map activeGameMap;
 
     @SuppressWarnings("unchecked")
-    private static final GenericMenuConsole menuConsole = new GenericMenuConsole(getMessage("MAIN_MENU_OPTION"),MainMenuActions.values());
+    private static final GenericMenuConsole menuConsole = new GenericMenuConsole(getMessage(MessageConstants.MAIN_MENU_OPTION),MainMenuActions.values());
 
     public static void main(String... args) {
         SplashScreen.showSplash();
@@ -30,7 +31,7 @@ public class Launcher {
     private static void goToMainMenu() {
         switch ((MainMenuActions)menuConsole.getActionValue()) {
             case START_NEW:
-                startGame(null);
+                startGame();
                 break;
             case SAVE_GAME_RESUME:
                 saveAndContinueGame();
@@ -44,9 +45,9 @@ public class Launcher {
         }
     }
 
-    private static void startGame(Map map) {
-        if (map == null) {
-            activeGameMap = MapFactory.getMap(new EnemySelectorConsole(getMessage("DIFFICULTY_OPTION"), DifficultyLevel.values()).getEnemyCount(), PlayerFactory.getPlayer());
+    private static void startGame() {
+        if (activeGameMap == null) {
+            activeGameMap = MapFactory.getMap(new EnemySelectorConsole(getMessage(MessageConstants.DIFFICULTY_OPTION), DifficultyLevel.values()).getEnemyCount(), PlayerFactory.getPlayer());
         }
         activeGameMap.render();
         while (activeGameMap.isPlayerAlive() && activeGameMap.tasksLeft()) {
@@ -56,7 +57,7 @@ public class Launcher {
             }
             activeGameMap.render();
             if(activeGameMap.isPlayerAlive() && !activeGameMap.tasksLeft()){
-                System.out.println(getMessage("WIN_MESSAGE",activeGameMap.findPlayerBlock().getEntity().getExperience()));
+                System.out.println(getMessage(MessageConstants.WIN_MESSAGE,activeGameMap.findPlayerBlock().getEntity().getExperience()));
             }
         }
     }
@@ -68,11 +69,11 @@ public class Launcher {
             try (FileOutputStream fos = new FileOutputStream("game.sav"); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(activeGameMap);
             } catch (IOException ex) {
-                System.out.println(getMessage("SAVE_ERROR") + ex);
+                System.out.println(getMessage(MessageConstants.SAVE_ERROR));
             }
 
         } else {
-            System.out.print(getMessage("START_GAME_TO_SAVE"));
+            System.out.println(getMessage(MessageConstants.START_GAME_TO_SAVE));
         }
     }
 
@@ -83,10 +84,10 @@ public class Launcher {
                 Object result = ois.readObject();
                 loadedMap = (Map) result;
             } catch (IOException | ClassNotFoundException ex) {
-                System.out.println(getMessage("LOAD_ERROR") + ex);
+                System.out.println(getMessage(MessageConstants.LOAD_ERROR));
             }
         } else {
-            System.out.println(getMessage("NO_SAVES"));
+            System.out.println(getMessage(MessageConstants.NO_SAVES));
         }
         return loadedMap;
     }
@@ -123,7 +124,7 @@ public class Launcher {
 
     private static void resumeGame() {
         activeGameMap.setMapPaused(false);
-        startGame(activeGameMap);
+        startGame();
     }
 
 

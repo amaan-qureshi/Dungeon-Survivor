@@ -5,6 +5,7 @@ import com.game.constants.EntityType;
 import com.game.components.entities.Entity;
 import com.game.components.input.impl.UserMovementConsole;
 import com.game.components.interactions.InteractionFactory;
+import com.game.constants.MessageConstants;
 import com.game.util.Position;
 
 import java.util.ArrayList;
@@ -136,7 +137,7 @@ public class Map implements RenderComponents {
                 nextBlock.setEntity(user);
             }
             else{
-                System.out.println(getMessage("XP_MESSAGE",user.getName(),user.getExperience()));
+                System.out.println(getMessage(MessageConstants.XP_MESSAGE,user.getName(),user.getExperience()));
             }
         }
     }
@@ -147,7 +148,7 @@ public class Map implements RenderComponents {
 
     public MapBlock findPlayerBlock(){
         return blocks().filter(b -> b.getEntity()!=null && b.getEntity().getType() == EntityType.PLAYER &&  b.getEntity().isAlive()).findFirst().
-                orElseThrow(() -> new IllegalStateException(getMessage("UNABLE_TO_FIND_PLAYER")));
+                orElseThrow(() -> new IllegalStateException(getMessage(MessageConstants.UNABLE_TO_FIND_PLAYER)));
     }
 
     public boolean isMapPaused() {

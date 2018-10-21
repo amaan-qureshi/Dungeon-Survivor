@@ -28,7 +28,7 @@ public class MapBlock implements Serializable{
         this.entity = entity;
     }
 
-    Position getPosition() {
+    public Position getPosition() {
         return position;
     }
 

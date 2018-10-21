@@ -3,15 +3,16 @@ package com.game.components.entities.impl;
 import com.game.constants.GameCharacters;
 import com.game.components.input.impl.GenericMenuConsole;
 import com.game.components.input.util.TextBox;
+import com.game.constants.MessageConstants;
 
 import static com.game.messages.MessageUtil.getMessage;
 
 public class PlayerFactory {
 
-    private static final TextBox characterName = new TextBox(getMessage("CHARACTER_NAME_OPTION"));
+    private static final TextBox characterName = new TextBox(getMessage(MessageConstants.CHARACTER_NAME_OPTION));
 
     @SuppressWarnings("unchecked")
-    private static final GenericMenuConsole raceMenu = new GenericMenuConsole(getMessage("PLAYER_CLASS_OPTION"), GameCharacters.values());
+    private static final GenericMenuConsole raceMenu = new GenericMenuConsole(getMessage(MessageConstants.PLAYER_CLASS_OPTION), GameCharacters.values());
 
     public static Player getPlayer() {
         characterName.showTitle();

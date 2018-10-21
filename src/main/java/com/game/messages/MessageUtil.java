@@ -15,6 +15,12 @@ public class MessageUtil {
         }
     }
     public static String getMessage(String key, Object... args){
-        return String.format(messages.getProperty(key),args);
+        String message = messages.getProperty(key);
+        if(message!=null) {
+            return String.format(message, args);
+        }
+        else{
+            return null;
+        }
     }
 }

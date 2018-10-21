@@ -1,5 +1,6 @@
 package com.game.components.maps;
 
+import com.game.constants.MessageConstants;
 import com.game.constants.MovementActions;
 import com.game.components.entities.impl.Enemy;
 import com.game.components.entities.impl.Player;
@@ -17,7 +18,7 @@ public class MapFactory {
 
     public static Map getMap(int enemyCount, Player player) {
 
-        Map gameMap = new Map(new UserMovementConsole(getMessage("CHARACTER_MOVEMENT_OPTION"), MovementActions.values()), new InteractionFactory());
+        Map gameMap = new Map(new UserMovementConsole(getMessage(MessageConstants.CHARACTER_MOVEMENT_OPTION), MovementActions.values()), new InteractionFactory());
         populateMap(gameMap, player, enemyCount);
         return gameMap;
     }
