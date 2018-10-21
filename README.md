@@ -30,14 +30,14 @@ java -jar .\target\Fantasy-RPG-1.0-SNAPSHOT-jar-with-dependencies.jar
 ## Playing the Game
 `
 * Dungeon Survivor is a survival game where the objective is to explore the map, kill all enemies and earn XP. The game finishes once all enemies on a map are dead
-* For input :  A menu appears every time an interation is available. To select an option press the number associated to that option and press the enter key
-* On starting a new game the game difficulty menu appears. The diffulty level decides the number of enemies randomly positioned on the map
+* For input :  A menu appears every time an interaction is available. To select an option press the number associated to that option and press the enter key
+* On starting a new game the game difficulty menu appears. The difficulty level decides the number of enemies randomly positioned on the map
 * The name of your player has to be entered after that and press enter to confirm.
 * Character class has to be chosen after that:
-    Each character has diffirent attributes:
+    Each character has different attributes:
     1. HP =  health of character
     2. POWER = maximum strength with which player can attack
-    3. ARMOUR = maximum sheild with which player can defend
+    3. ARMOUR = maximum shield with which player can defend
 * The game begins after that. On the map <b>P</b> indicates location of player and <b>E</b> indicates enemies
 * You can move around the map by using the displayed options.
 * To go back to main menu to save or to start a new game press 5 and then enter.
