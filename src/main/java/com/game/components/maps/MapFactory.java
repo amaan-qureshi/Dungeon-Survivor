@@ -16,21 +16,21 @@ import static com.game.messages.MessageUtil.getMessage;
 
 public class MapFactory {
 
-    public static Map getMap(int enemyCount, Player player) {
+    public static GameMap getMap(int enemyCount, Player player) {
 
-        Map gameMap = new Map(new UserMovementConsole(getMessage(MessageConstants.CHARACTER_MOVEMENT_OPTION), MovementActions.values()), new InteractionFactory());
-        populateMap(gameMap, player, enemyCount);
-        return gameMap;
+        GameMap gameGameMap = new GameMap(new UserMovementConsole(getMessage(MessageConstants.CHARACTER_MOVEMENT_OPTION), MovementActions.values()), new InteractionFactory());
+        populateMap(gameGameMap, player, enemyCount);
+        return gameGameMap;
     }
 
-    private static void populateMap(Map gameMap, Player player, int enemyCount) {
+    private static void populateMap(GameMap gameGameMap, Player player, int enemyCount) {
 
         List<Position> usedPositionTracker = new ArrayList<>();
-        gameMap.getMapBlocks().get(7).get(0).setEntity(player);
+        gameGameMap.getMapBlocks().get(7).get(0).setEntity(player);
         usedPositionTracker.add(new Position(7, 0));
         for (int i = 0; i < enemyCount; i++) {
             Position enemyPosition = generateRandomUnusedPosition(usedPositionTracker);
-            gameMap.getMapBlocks().get(enemyPosition.getX()).get(enemyPosition.getY()).setEntity(new Enemy(10,20,10));
+            gameGameMap.getMapBlocks().get(enemyPosition.getX()).get(enemyPosition.getY()).setEntity(new Enemy(10,20,10));
         }
     }
 

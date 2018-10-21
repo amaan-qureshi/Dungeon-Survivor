@@ -16,7 +16,7 @@ import static com.game.messages.MessageUtil.getMessage;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.generate;
 
-public class Map implements RenderComponents {
+public class GameMap implements RenderComponents {
 
     private final UserMovementConsole userMovementInput;
     private final InteractionFactory interactionFactory;
@@ -25,7 +25,7 @@ public class Map implements RenderComponents {
 
     private final List<List<MapBlock>> mapBlocks = new ArrayList<>();
 
-    Map(UserMovementConsole userMovementInput, InteractionFactory interactionFactory){
+    public GameMap(UserMovementConsole userMovementInput, InteractionFactory interactionFactory){
         this.userMovementInput = userMovementInput;
         this.interactionFactory = interactionFactory;
         int rowMapSize = 8;
@@ -102,13 +102,13 @@ public class Map implements RenderComponents {
     public void goToNextTurn() {
         MapBlock playerBlock = findPlayerBlock();
         Position nextPosition = userMovementInput.getNextPosition(playerBlock.getPosition());
-        if(gamePaused(nextPosition)){return;}
+        if(isGamePaused(nextPosition)){return;}
         if (isValid(nextPosition)) {
             moveUser(playerBlock.getPosition(), nextPosition);
         }
     }
 
-    private boolean gamePaused(Position nextPosition) {
+    private boolean isGamePaused(Position nextPosition) {
         if(nextPosition.getY()==99 && nextPosition.getX()==99){
             this.isMapPaused = true;
             return true;

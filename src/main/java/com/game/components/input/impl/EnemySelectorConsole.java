@@ -16,9 +16,9 @@ public class EnemySelectorConsole extends GenericMenuConsole {
             case EASY:
                 return 20;
             case MEDIUM:
-                return 30;
+                return 35;
             case HARD:
-                return 40;
+                return 50;
             default:
                 throw new IllegalStateException("Unsupported difficulty Level: " + difficultyLevel);
         }

@@ -26,8 +26,7 @@ public class TestInteractionFactory {
 
     @Test(expected = IllegalArgumentException.class)
     public void testGetInteractionThrowsException() throws Exception {
-        Enemy enemy = new Enemy(10,10,10);
-        Interaction interaction = interactionFactory.getInteraction(EntityType.UNKNOWN);
+        interactionFactory.getInteraction(EntityType.UNKNOWN);
     }
 
 }

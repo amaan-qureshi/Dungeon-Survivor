@@ -3,28 +3,20 @@ package com.test.game.logic;
 
 import com.game.components.entities.impl.Enemy;
 import com.game.components.entities.impl.Player;
-import com.game.components.interactions.PlayerEnemyFight;
-import org.junit.Before;
+import com.game.components.interactions.actions.AttackOperation;
+import com.game.components.interactions.actions.DefendOperation;
+import com.game.components.interactions.actions.PlayerActionInvoker;
 import org.junit.Test;
-import org.powermock.reflect.Whitebox;
 
 public class TestFightLogic {
 
-    private PlayerEnemyFight fightLogic;
-
-    @Before
-    public void setUp() {
-        fightLogic = new PlayerEnemyFight();
-    }
 
     @Test
     public void testAttackEnemy() throws Exception {
         Player player = new Player("Player","Test",100,10,10);
         int initialEnemyHealth = 10;
         Enemy enemy = new Enemy(initialEnemyHealth,10,10);
-        Whitebox.setInternalState(fightLogic, "user", player);
-        Whitebox.setInternalState(fightLogic, "enemy", enemy);
-        Whitebox.invokeMethod(fightLogic,"attackEnemy");
+        PlayerActionInvoker.executeOperation(new AttackOperation(player, enemy));
         assert(enemy.getHealth()<initialEnemyHealth);
     }
 
@@ -34,11 +26,8 @@ public class TestFightLogic {
         Player player = new Player("Player","Test",100,10,10);
         int initialEnemyHealth = 10;
         Enemy enemy = new Enemy(initialEnemyHealth,10,10);
-        Whitebox.setInternalState(fightLogic, "user", player);
-        Whitebox.setInternalState(fightLogic, "enemy", enemy);
-
         do {
-            Whitebox.invokeMethod(fightLogic, "attackEnemy");
+            PlayerActionInvoker.executeOperation(new AttackOperation(player, enemy));
         }
         while(enemy.isAlive());
         assert(player.getExperience()>0);
@@ -46,15 +35,13 @@ public class TestFightLogic {
     }
 
     @Test
-    public void testAttackEnemyIfEnenmySurvives() throws Exception {
+    public void testAttackEnemyIfEnemySurvives() throws Exception {
         int initialPlayerHealth = 10;
         Player player = new Player("Test","Test",initialPlayerHealth,10,10);
-        int initialEnemyHealth = 100;
+        int initialEnemyHealth = 1000;
         Enemy enemy = new Enemy(initialEnemyHealth,10,10);
-        Whitebox.setInternalState(fightLogic, "user", player);
-        Whitebox.setInternalState(fightLogic, "enemy", enemy);
         do {
-            Whitebox.invokeMethod(fightLogic, "attackEnemy");
+            PlayerActionInvoker.executeOperation(new AttackOperation(player, enemy));
         }
         while(!enemy.isAlive());
 
@@ -67,9 +54,7 @@ public class TestFightLogic {
         Player player = new Player("Player","Test",10,10,10);
         int initialEnemyHealth = 10;
         Enemy enemy = new Enemy(initialEnemyHealth,10,10);
-        Whitebox.setInternalState(fightLogic, "user", player);
-        Whitebox.setInternalState(fightLogic, "enemy", enemy);
-        Whitebox.invokeMethod(fightLogic,"defend");
+        PlayerActionInvoker.executeOperation(new DefendOperation(player, enemy));
         assert(player.isAlive());
     }
 
