@@ -14,7 +14,7 @@ mvn clean install
 
 To build the project reports(Cobertura/FindBugs/PMD) please execute the following command
 ```
-clean install site
+mvn clean install site
 ```
 reports can be found in 
 * \target\site\cobertura\index.html
