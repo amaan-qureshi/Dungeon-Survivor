@@ -19,18 +19,18 @@ public class GameEntry {
     private static final String SAVE_FILE_NAME = "game.sav";
 
     @SuppressWarnings("unchecked")
-    private static final GenericMenuConsole menuConsole = new GenericMenuConsole(getMessage(MessageConstants.MAIN_MENU_OPTION),MainMenuActions.values());
+    private static final GenericMenuConsole menuConsole = new GenericMenuConsole(getMessage(MessageConstants.MAIN_MENU_OPTION), MainMenuActions.values());
 
     public static void beginGame() {
         SplashScreen.showSplash();
         do {
             goToMainMenu();
         }
-        while (activeGameGameMap ==null || !activeGameGameMap.isGameExited());
+        while (activeGameGameMap == null || !activeGameGameMap.isGameExited());
     }
 
     private static void goToMainMenu() {
-        switch ((MainMenuActions)menuConsole.getActionValue()) {
+        switch ((MainMenuActions) menuConsole.getActionValue()) {
             case START_NEW:
                 startGame();
                 break;
@@ -47,7 +47,7 @@ public class GameEntry {
     }
 
     private static void startGame() {
-        if (activeGameGameMap == null) {
+        if (activeGameGameMap == null || !activeGameGameMap.tasksLeft()) {
             activeGameGameMap = MapFactory.getMap(new EnemySelectorConsole(getMessage(MessageConstants.DIFFICULTY_OPTION), DifficultyLevel.values()).getEnemyCount(), PlayerFactory.getPlayer());
         }
         activeGameGameMap.render();
@@ -57,24 +57,19 @@ public class GameEntry {
                 break;
             }
             activeGameGameMap.render();
-            if(activeGameGameMap.isPlayerAlive() && !activeGameGameMap.tasksLeft()){
+            if (activeGameGameMap.isPlayerAlive() && !activeGameGameMap.tasksLeft()) {
                 System.out.println(getMessage(MessageConstants.WIN_MESSAGE, activeGameGameMap.findPlayerBlock().getEntity().getExperience()));
             }
         }
     }
 
     private static void saveGame() {
-        if (activeGameGameMap != null) {
-            activeGameGameMap.setGameExited(false);
-            activeGameGameMap.setMapPaused(false);
-            try (FileOutputStream fos = new FileOutputStream(SAVE_FILE_NAME); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                oos.writeObject(activeGameGameMap);
-            } catch (IOException ex) {
-                System.out.println(getMessage(MessageConstants.SAVE_ERROR));
-            }
-
-        } else {
-            System.out.println(getMessage(MessageConstants.START_GAME_TO_SAVE));
+        activeGameGameMap.setGameExited(false);
+        activeGameGameMap.setMapPaused(false);
+        try (FileOutputStream fos = new FileOutputStream(SAVE_FILE_NAME); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(activeGameGameMap);
+        } catch (IOException ex) {
+            System.out.println(getMessage(MessageConstants.SAVE_ERROR));
         }
     }
 
@@ -99,20 +94,29 @@ public class GameEntry {
     }
 
     private static void saveAndExitGame() {
-        saveGame();
-        if(activeGameGameMap !=null){
+        if (activeGameGameMap != null) {
+            if (!activeGameGameMap.tasksLeft() || !activeGameGameMap.isPlayerAlive()) {
+                System.out.println(getMessage(MessageConstants.GAME_ALREADY_WON));
+                return;
+            }
+            saveGame();
             activeGameGameMap.setGameExited(true);
+        } else {
+            System.out.println(getMessage(MessageConstants.START_GAME_TO_SAVE));
         }
-
-
     }
 
     private static void saveAndContinueGame() {
-        saveGame();
-        if(activeGameGameMap !=null){
+        if (activeGameGameMap != null) {
+            if (!activeGameGameMap.tasksLeft() || !activeGameGameMap.isPlayerAlive()) {
+                System.out.println(getMessage(MessageConstants.GAME_ALREADY_WON));
+                return;
+            }
+            saveGame();
             resumeGame();
+        } else {
+            System.out.println(getMessage(MessageConstants.START_GAME_TO_SAVE));
         }
-
     }
 
     private static void loadGame() {

@@ -7,6 +7,7 @@ public interface MessageConstants {
    String SAVE_ERROR = "SAVE_ERROR";
    String LOAD_ERROR = "LOAD_ERROR";
    String NO_SAVES = "NO_SAVES";
+   String GAME_ALREADY_WON = "GAME_ALREADY_WON";
    String XP_MESSAGE = "XP_MESSAGE";
    String MAIN_MENU_OPTION = "MAIN_MENU_OPTION";
    String DIFFICULTY_OPTION = "DIFFICULTY_OPTION";

@@ -14,9 +14,9 @@ public class EnemySelectorConsole extends GenericMenuConsole {
 
         switch (difficultyLevel) {
             case EASY:
-                return 20;
+                return 7;
             case MEDIUM:
-                return 35;
+                return 25;
             case HARD:
                 return 50;
             default:

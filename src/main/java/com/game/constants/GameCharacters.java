@@ -1,8 +1,8 @@
 package com.game.constants;
 public enum GameCharacters {
-    SOLDIER("Knight","Elite Balanced Fighter",30,30,40),
-    NINJA("Ninja","Silent and Fast",50,25,25),
-    TANK("Tank","Slow and Strong",30,20,50);
+    SOLDIER("Knight","Elite Balanced Fighter",40,30,30),
+    NINJA("Ninja","Silent and Fast",30,40,20),
+    TANK("Tank","Slow and Strong",60,20,20);
 
     private final String playerClass;
     private final String description;

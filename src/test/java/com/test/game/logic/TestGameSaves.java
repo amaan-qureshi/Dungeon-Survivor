@@ -16,7 +16,9 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.spy;
+import static org.powermock.api.mockito.PowerMockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({GameEntry.class})
@@ -46,10 +48,13 @@ public class TestGameSaves {
 
    @Test
     public void testSave() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        GameMap gameMap = new GameMap(null, null);
+       // GameMap gameMap = new GameMap(null, null);
+       GameMap gameMap = mock(GameMap.class);
+       when(gameMap.isPlayerAlive()).thenReturn(true);    // Mock implementation
+       when(gameMap.tasksLeft()).thenReturn(true);
         Whitebox.setInternalState(GameEntry.class, "activeGameGameMap", gameMap);
         spy(GameEntry.class);
-        Method saveGame = GameEntry.class.getDeclaredMethod("saveGame");
+        Method saveGame = GameEntry.class.getDeclaredMethod("saveAndExitGame");
         saveGame.setAccessible(true);
         saveGame.invoke(null);
 
